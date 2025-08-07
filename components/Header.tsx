@@ -24,7 +24,7 @@ export const Header: React.FC = () => {
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           <Link href="/" className="text-xl font-bold text-gray-900 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-            Minimal Notes
+            Nyootes
           </Link>
           
           <nav className="flex items-center space-x-4">
