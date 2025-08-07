@@ -161,6 +161,26 @@ class FirebaseService {
       throw new Error(error.message || 'Profile picture upload failed');
     }
   }
+async uploadNoteImage(file: File, userId: string): Promise<string> {
+    try {
+      // Create a unique filename using timestamp and random string
+      const timestamp = Date.now();
+      const randomString = Math.random().toString(36).substring(2, 15);
+      const filename = `${timestamp}-${randomString}-${file.name}`;
+      
+      // Create storage reference with user-specific path
+      const storageRef = ref(storage, `notes/${userId}/${filename}`);
+      
+      // Upload file to Firebase Storage
+      const snapshot = await uploadBytes(storageRef, file);
+      
+      // Get download URL
+      const downloadURL = await getDownloadURL(snapshot.ref);
+      return downloadURL;
+    } catch (error: any) {
+      throw new Error(error.message || 'Image upload failed');
+    }
+  }
 
   async deleteProfilePicture(userId: string): Promise<void> {
     try {
